@@ -70,52 +70,56 @@ const book5 = {
   isAvailable: false,
 };
 
-const libraryBooks: Array<Book> = [];
-const borrowedBooks: Array<Book> = [];
-const availableBooks: Array<Book> = [];
-const books: Map<Number, Book> = new Map();
+const libraryBooks: Map<Number, Book> = new Map();
+const borrowedBooks: Map<Number, Book> = new Map();
+const availableBooks: Map<Number, Book> = new Map();
 
-books.set(1, book1);
-books.set(2, book2);
-books.set(3, book3);
-books.set(4, book4);
-books.set(5, book5);
+libraryBooks.set(book1.id, book1);
+libraryBooks.set(book2.id, book2);
+libraryBooks.set(book3.id, book3);
+libraryBooks.set(book4.id, book4);
+libraryBooks.set(book5.id, book5);
 
 function addToLibrary(book: Book) {
-  const existingBook = books.get(book.id); //when i wrote book.get, i got an error message:Property 'get' does not exist on type 'Book'. (ts 2339)
+  const existingBook = libraryBooks.get(book.id); //when i wrote book.get, i got an error message:Property 'get' does not exist on type 'Book'. (ts 2339)
   if (!existingBook) {
     console.log("No book found in the shelf");
     return "No book found in the shelf";
   } else {
-    libraryBooks.push(book);
+    libraryBooks.set(book.id, book);
   }
 }
 
 function addToBorrowedBooks(book: Book) {
-  const existingBook = books.get(book.id);
+  const existingBook = libraryBooks.get(book.id);
   if (!borrowedBooks) {
     console.log("The Book has not been borrowed");
     return "The Book has not been borrowed";
   } else {
-    borrowedBooks.push(book);
+    borrowedBooks.set(book.id, book);
     console.log(`${book.title}has been borrowd`);
   }
 }
 
 function toCheckIfBookIsAvailable(book: Book) {
-  const existingBook = books.get(book.id);
+  const existingBook = libraryBooks.get(book.id);
+
+  if (!existingBook) {
+    return "Not found";
+  }
+
   if (!existingBook.isAvailable) {
     console.log("the book is not available");
     return "the book is not available";
   } else if (existingBook?.isAvailable) {
     console.log(`${book.title} IS available`);
   } else {
-    availableBooks.push(book);
+    availableBooks.set(book.id, book);
   }
 }
 
 function returnBook(book: Book) {
-  const availableBooks = books.get(book.id); // when i wrote book.isbn, i got an error
+  const availableBooks = libraryBooks.get(book.id); // when i wrote book.isbn, i got an error
   if (availableBooks?.isbn) {
     console.log();
   }
