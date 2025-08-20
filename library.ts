@@ -70,14 +70,6 @@ const book5 = {
   isAvailable: false,
 };
 
-const book6 = {
-  id: 6,
-  title: "The Diary of a wimpy Girl",
-  author: "Anne Frank",
-  isbn: "97856756296983",
-  genre: BookGenre.Biography,
-  isAvailable: false,
-};
 const libraryBooks: Array<Book> = [];
 const borrowedBooks: Array<Book> = [];
 const availableBooks: Array<Book> = [];
@@ -88,7 +80,6 @@ books.set(2, book2);
 books.set(3, book3);
 books.set(4, book4);
 books.set(5, book5);
-books.set(6, book6);
 
 function addToLibrary(book: Book) {
   const existingBook = books.get(book.id); //when i wrote book.get, i got an error message:Property 'get' does not exist on type 'Book'. (ts 2339)
